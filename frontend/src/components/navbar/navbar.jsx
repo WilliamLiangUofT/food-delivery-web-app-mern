@@ -3,7 +3,7 @@ import { assets } from '../../assets/assets';
 import { useState } from 'react';
 import { Link } from 'react-router';
 
-function NavBar() {
+function NavBar({setShowLoginPopup}) {
     const [menuSelected, setMenuSelected] = useState("home");
 
     return (
@@ -22,7 +22,7 @@ function NavBar() {
             <div className='right-side'>
                 <img src={assets.searchbar} id='search-bar'/>
                 <img src={assets.cart} id='cart-icon'/>
-                <button>Sign In</button>
+                <button onClick={() => setShowLoginPopup(true)}>Sign In</button>
             </div>
         </div>
     );

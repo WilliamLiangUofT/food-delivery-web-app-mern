@@ -1,0 +1,70 @@
+:root {
+    --pink-sand: hsl(350, 100%, 83%)
+}
+
+.login-popup {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: hsla(0, 0%, 51%, 0.45);
+    backdrop-filter: blur(2px);
+    z-index: 2000;
+}
+
+
+.login-popup-container {
+    display: flex;
+    flex-direction: column;
+    background-color: hsl(0, 0%, 97%);
+    padding: 2rem;
+    gap: 2vh;
+}
+
+.sign-up-login-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sign-up-login-top h3 {
+    font-size: 1.9rem;
+}
+
+.input-boxes-log {
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+}
+
+.input-boxes-log input {
+    border: 1px solid hsl(0, 0%, 79%);
+    padding: 10px;
+    border-radius: 4px;
+    outline: none;
+    width: 300px;
+}
+
+.input-boxes-log span {
+    color: var(--pink-sand);
+    cursor: pointer;
+    font-weight: 550;
+}
+
+.create-acc-log-in {
+    border-radius: 50px;
+    border: 2px solid var(--pink-sand);
+    background-color: white;
+    color: var(--pink-sand);
+    cursor: pointer;
+    padding: 8px 24px;
+    font-size: 16px;
+}
+
+
+.sign-up-login-top .close-icon {
+    width: max(2.9rem, 1.8vw);
+    cursor: pointer;
+}
+

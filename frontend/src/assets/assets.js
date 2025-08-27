@@ -1,5 +1,6 @@
 import searchbar from './search.svg'
 import cart from './cart.svg'
+import close from './close.svg'
 
 import menu1 from './menu_1.png'
 import menu2 from './menu_2.png'
@@ -60,7 +61,8 @@ export const assets = {
     add_icon_green,
     remove_icon_red,
     app_store,
-    play_store
+    play_store,
+    close
 };
 
 // Retrieve this from backend once backend is added
