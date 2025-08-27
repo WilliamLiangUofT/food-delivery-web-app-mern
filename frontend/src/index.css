@@ -4,6 +4,7 @@
   padding: 0;
   margin: 0;
   font-family: Poppins;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -11,8 +12,8 @@ body {
   background-color: hsl(0, 0%, 97%);
 }
 
-.main-app {
+/* .main-app {
   width: 80vw;
   margin: auto;
-}
+} */
 

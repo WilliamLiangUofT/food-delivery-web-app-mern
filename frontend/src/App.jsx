@@ -2,7 +2,7 @@ import NavBar from "./components/navbar/navbar"
 import Home from "./pages/Home/home"
 import Cart from "./pages/Cart/cart"
 import PlaceOrder from "./pages/PlaceOrder/placeorder"
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route } from 'react-router'
 import Footer from "./components/footer/footer"
 
 function App() {

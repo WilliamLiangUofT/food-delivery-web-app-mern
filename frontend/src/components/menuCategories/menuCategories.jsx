@@ -3,7 +3,7 @@ import { menu_items } from '../../assets/assets';
 
 function MenuCategories({menuCategory, setMenuCategory}) {
     return (
-        <div className='explore-menu-container'>
+        <div className='explore-menu-container' id='explore-menu'>
             <div className='header-title'>
                 <h3>Explore Our Menu</h3>
             </div>

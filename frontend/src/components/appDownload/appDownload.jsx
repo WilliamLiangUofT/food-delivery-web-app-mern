@@ -3,7 +3,7 @@ import { assets } from '../../assets/assets';
 
 function AppDownload() {
     return (
-        <div className='apps-container'>
+        <div className='apps-container' id='download-app'>
             <h1>
                 For a Better Experience Download the Foodi App
             </h1>

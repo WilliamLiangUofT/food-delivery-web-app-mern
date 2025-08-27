@@ -1,9 +1,10 @@
 import './navbar.css'
 import { assets } from '../../assets/assets';
 import { useState } from 'react';
+import { Link } from 'react-router';
 
 function NavBar() {
-    const [menuSelected, setMenuSelected] = useState("");
+    const [menuSelected, setMenuSelected] = useState("home");
 
     return (
         <div className="navigation-bar">
@@ -12,10 +13,10 @@ function NavBar() {
             </div>
             <div className='middle'>
                 <ul>
-                    <li className={menuSelected === "home" ? "active" : ""} onClick={() => setMenuSelected(m => "home")}>Home</li>
-                    <li className={menuSelected === "menu" ? "active" : ""} onClick={() => setMenuSelected(m => "menu")}>Menu</li>
-                    <li className={menuSelected === "about" ? "active" : ""} onClick={() => setMenuSelected(m => "about")}>About us</li>
-                    <li className={menuSelected === "contact" ? "active" : ""} onClick={() => setMenuSelected(m => "contact")}>Contact</li>
+                    <Link to="/" className={menuSelected === "home" ? "active" : ""} onClick={() => setMenuSelected(m => "home")}>Home</Link>
+                    <a href='#explore-menu' className={menuSelected === "menu" ? "active" : ""} onClick={() => setMenuSelected(m => "menu")}>Menu</a>
+                    <a href='#download-app' className={menuSelected === "about" ? "active" : ""} onClick={() => setMenuSelected(m => "about")}>About us</a>
+                    <a href='#footer' className={menuSelected === "contact" ? "active" : ""} onClick={() => setMenuSelected(m => "contact")}>Contact</a>
                 </ul>
             </div>
             <div className='right-side'>

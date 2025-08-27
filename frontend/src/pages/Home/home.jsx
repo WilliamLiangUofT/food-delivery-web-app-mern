@@ -9,7 +9,7 @@ function Home() {
     const [menuCategory, setMenuCategory] = useState("");
 
     return (
-        <div>
+        <div className='home-component'>
             <Header/>
             <MenuCategories menuCategory={menuCategory} setMenuCategory={setMenuCategory}/>
             <DishDisplay category={menuCategory}/>

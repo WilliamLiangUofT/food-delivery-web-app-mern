@@ -2,7 +2,7 @@ import './footer.css'
 
 function Footer() {
     return (
-        <div className='footer'>
+        <div className='footer' id='footer'>
             <div className='top-majority'>
                 <div className='left-area'>
                     <h2>Foodi</h2>
