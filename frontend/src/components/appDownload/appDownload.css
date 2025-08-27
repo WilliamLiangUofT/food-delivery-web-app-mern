@@ -1,0 +1,17 @@
+.apps-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10vh;
+    gap: 3vh;
+}
+
+.apps-container h1 {
+    font-size: max(2.7rem, 3.6vh);
+}
+
+.app-icon-imgs {
+    display: flex;
+    gap: 1.5vw;
+}

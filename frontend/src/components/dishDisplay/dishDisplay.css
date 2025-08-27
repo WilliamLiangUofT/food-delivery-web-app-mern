@@ -1,0 +1,16 @@
+.dish-display-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 3vh;
+    gap: 3vh;
+}
+
+.dish-display-container h2 {
+    font-size: clamp(1.5rem, 2.0rem, 2.5rem);
+}
+
+.dish-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(clamp(260px, 22vw, 360px), 1fr));
+    gap: 2.75vw;
+}
