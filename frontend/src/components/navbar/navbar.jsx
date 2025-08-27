@@ -9,7 +9,7 @@ function NavBar({setShowLoginPopup}) {
     return (
         <div className="navigation-bar">
             <div className='logo'>
-                <h2>Foodi</h2>
+                <Link to='/'><h2>Foodi</h2></Link>
             </div>
             <div className='middle'>
                 <ul>
@@ -21,7 +21,7 @@ function NavBar({setShowLoginPopup}) {
             </div>
             <div className='right-side'>
                 <img src={assets.searchbar} id='search-bar'/>
-                <img src={assets.cart} id='cart-icon'/>
+                <Link to='/cart'><img src={assets.cart} id='cart-icon'/></Link>
                 <button onClick={() => setShowLoginPopup(true)}>Sign In</button>
             </div>
         </div>

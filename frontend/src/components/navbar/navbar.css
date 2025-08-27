@@ -22,6 +22,11 @@
     cursor: pointer;
 }
 
+.logo a {
+    color: inherit;
+    text-decoration: none;
+}
+
 .middle ul {
     display: flex;
     gap: 2vw;
