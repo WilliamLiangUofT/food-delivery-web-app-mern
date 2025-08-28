@@ -18,12 +18,25 @@ function ContextStoreProvider({children}) {
         setCartCounts(prevCartCounts => ({...prevCartCounts, [dishID]: prevCartCounts[dishID] - 1}));
     };
 
+    const getCart = () => {
+        return food_list.filter(element => element._id in cartCounts && cartCounts[element._id] > 0);
+    };
+
+    const getCartTotalCost = () => {
+        const filter_food_list = getCart();
+        const theTotalCost = filter_food_list.reduce((accumulator, element) => accumulator + element.price * cartCounts[element._id], 0);
+        
+        return theTotalCost;
+    };
+
     const context = {
         food_list,
         cartCounts,
         setCartCounts,
         addToCart,
-        removeFromCart
+        removeFromCart,
+        getCart,
+        getCartTotalCost
     };
 
     return (

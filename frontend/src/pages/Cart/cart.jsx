@@ -1,13 +1,13 @@
 import { useContext } from 'react';
 import './cart.css'
 import { GlobalContext } from '../../context/ContextStore';
+import { useNavigate } from 'react-router';
 
 function Cart() {
 
-    const { cartCounts, food_list, removeFromCart } = useContext(GlobalContext);
-
-    const filtered_food_list = food_list.filter(element => element._id in cartCounts && cartCounts[element._id] > 0)
-    const totalCost = filtered_food_list.reduce((accumulator, element) => accumulator + element.price * cartCounts[element._id], 0);
+    const { cartCounts, removeFromCart, getCart, getCartTotalCost } = useContext(GlobalContext);
+    const filtered_food_list = getCart();
+    const navigate = useNavigate();
 
     return (
         <div className='cart-page'>
@@ -46,21 +46,22 @@ function Cart() {
                         
                         <div className='cart-total-details'>
                             <p>Subtotal</p>
-                            <p>{totalCost}</p>
+                            <p>${getCartTotalCost()}</p>
                         </div>
                         <hr/>
                         <div className='cart-total-details'>
                             <p>Delivery Fee</p>
-                            <p>{filtered_food_list.length}</p>
+                            <p>${filtered_food_list.length}</p>
                         </div>
                         <hr/>
                         <div className='cart-total-details' id='total-cart-value'>
                             <p>Total</p>
-                            <p>{totalCost + filtered_food_list.length}</p>
+                            <p>${getCartTotalCost() + filtered_food_list.length}</p>
                         </div>
                         
                     </div>
-                    <button>PROCEED TO CHECKOUT</button>
+
+                    <button onClick={() => navigate('/order')}>PROCEED TO CHECKOUT</button>
                     
                 </div>
                 <div className='promo-code'>
