@@ -36,7 +36,7 @@ function AddItem() {
         
         try {
             await addItem(formdataPayload).unwrap();
-            console.log('hi');
+            
             setProductData({
                 name: "",
                 description: "",
