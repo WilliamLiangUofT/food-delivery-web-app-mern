@@ -1,0 +1,62 @@
+.additem-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+    margin-left: 6vw;
+    margin-top: 6vh;
+}
+
+.additem-container p {
+    color: gray;
+    font-size: 1.0vw;
+}
+
+.upload-image {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7vh;
+}
+
+
+.upload-image img {
+    width: 8vw;
+}
+
+.product-name input {
+    width: 26vw;
+    padding: 12px;
+    margin-top: 7px;
+}
+
+.product-name input::placeholder {
+    font-size: 1.05rem;
+}
+
+.product-description textarea {
+    padding: 12px;
+    width: 26.02vw;
+    margin-top: 7px;
+}
+.product-description textarea::placeholder {
+    font-size: 1.05rem;
+}
+
+.category-price-area {
+    display: flex;
+    gap: 3vw;
+}
+
+.product-price input {
+    padding: 12px;
+    margin-top: 7px;
+}
+.product-price input::placeholder {
+    font-size: 1.05rem;
+}
+
+.product-category select {
+    padding: 12px;
+    margin-top: 7px;
+    font-size: 1.05rem;
+}
+

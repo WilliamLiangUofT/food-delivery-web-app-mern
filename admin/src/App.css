@@ -1,0 +1,13 @@
+.admin-grid-area {
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    grid-template-rows: 1fr 8fr;
+}
+
+.navbar-component {
+    grid-area: 1 / 1 / 2 / 3;
+}
+
+.sidebar-component {
+    grid-area: 2 / 1 / 3 / 2;
+}

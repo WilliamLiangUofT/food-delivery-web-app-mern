@@ -1,0 +1,39 @@
+:root {
+    --pink-sand: hsl(350, 100%, 83%)
+}
+
+.navbar-component {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2vh 5vw;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+    /* width: 100%; */
+}
+
+.foodi-logo h2 {
+    color: var(--pink-sand);
+    font-size: max(4.5vh, 3.0rem);
+    cursor: pointer;
+    margin-bottom: -0.8vh;
+}
+
+.foodi-logo h4 {
+    font-weight: 530;
+    cursor: pointer;
+}
+
+.profile-area {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.profile-area img {
+    width: max(2.5vw, 2.9rem);
+}
+
+.profile-area h3 {
+    font-weight: 550;
+    font-size: 2.7vh;
+}
