@@ -1,7 +1,9 @@
-import { useGetItemsQuery } from '../../slices/adminAPISlices';
+import { useGetItemsQuery, useRemoveItemMutation } from '../../slices/adminAPISlices';
 import './listItems.css'
 
 function ListItems() {
+
+    const [ removeItem ] = useRemoveItemMutation();
 
     const { data, isLoading, error } = useGetItemsQuery();
     
@@ -28,7 +30,7 @@ function ListItems() {
                             <p>{element.name}</p>
                             <p>{element.category}</p>
                             <p>{element.price}</p>
-                            <p onClick={() => console.log("hi")} className='food-dish-remove-x'>x</p>
+                            <p onClick={() => removeItem(element._id)} className='food-dish-remove-x'>x</p>
                         </div>
                     );
                 })}

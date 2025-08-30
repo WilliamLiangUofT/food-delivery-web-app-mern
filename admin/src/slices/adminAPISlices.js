@@ -11,10 +11,14 @@ export const apiSlice = createApi({
         addItem: builder.mutation({
             query: (formData) => ({url: '/foodMenu/add', method: 'POST', body: formData}),
             invalidatesTags: ["Items"]
+        }),
+        removeItem: builder.mutation({
+            query: (id) => ({url: '/foodMenu/remove', method: 'POST', body: {id}}),
+            invalidatesTags: ["Items"]
         })
     })
 })
 
-export const { useGetItemsQuery, useAddItemMutation } = apiSlice;
+export const { useGetItemsQuery, useAddItemMutation, useRemoveItemMutation } = apiSlice;
 
 
