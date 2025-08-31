@@ -18,7 +18,7 @@ export const apiSlice = createApi({
         })
     })
 })
-
+// The tags above help with rerenders. When a mutation is performed, the invalidatesTag will basically cause a rerender for getItems, redisplayign the value
 export const { useGetItemsQuery, useAddItemMutation, useRemoveItemMutation } = apiSlice;
 
 
