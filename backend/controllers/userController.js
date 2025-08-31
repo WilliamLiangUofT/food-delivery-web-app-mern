@@ -21,7 +21,8 @@ export const registerUser = async (req, res, next) => {
                 userInfo: {
                     _id: user._id,
                     name: user.name,
-                    email: user.email
+                    email: user.email,
+                    cartData: user.cartData
                 }
             });
         } else {
@@ -50,7 +51,8 @@ export const authUser = async (req, res, next) => {
                 userInfo: {
                     _id: user._id,
                     name: user.name,
-                    email: user.email
+                    email: user.email,
+                    cartData: user.cartData
                 }
             });
         } else {
@@ -93,6 +95,9 @@ export const removeCartItems = async (req, res, next) => {
 };
 
 export const getCartItems = async (req, res, next) => {
-    res.status(200).json({message: "cart data obtained"});
+    const userInformation = req.user;
+    res.status(200).json({
+        cart_items: userInformation.cartData
+    });
 };
 
