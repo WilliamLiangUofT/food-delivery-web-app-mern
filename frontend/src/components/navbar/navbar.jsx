@@ -2,9 +2,16 @@ import './navbar.css'
 import { assets } from '../../assets/assets';
 import { useState } from 'react';
 import { Link } from 'react-router';
+import { GlobalContext } from '../../context/ContextStore';
+import { useContext } from 'react';
+import { useSelector } from 'react-redux';
 
 function NavBar({setShowLoginPopup}) {
     const [menuSelected, setMenuSelected] = useState("home");
+
+    const { userSignedIn } = useContext(GlobalContext);
+
+    const userData = useSelector((state) => state.user);
 
     return (
         <div className="navigation-bar">
@@ -22,7 +29,7 @@ function NavBar({setShowLoginPopup}) {
             <div className='right-side'>
                 <img src={assets.searchbar} id='search-bar'/>
                 <Link to='/cart'><img src={assets.cart} id='cart-icon'/></Link>
-                <button onClick={() => setShowLoginPopup(true)}>Sign In</button>
+                {userSignedIn ? <h2 className='login-name-h2'>{userData.name}</h2> : <button onClick={() => setShowLoginPopup(true)}>Sign In</button>}
             </div>
         </div>
     );

@@ -6,6 +6,8 @@ export const GlobalContext = createContext();
 function ContextStoreProvider({children}) {
     const [cartCounts, setCartCounts] = useState({});
 
+    const [userSignedIn, setUserSignedIn] = useState(false);
+
     const addToCart = (dishID) => {
         if (dishID in cartCounts) {
             setCartCounts(prevCartCounts => ({...prevCartCounts, [dishID]: prevCartCounts[dishID] + 1}));
@@ -36,7 +38,9 @@ function ContextStoreProvider({children}) {
         addToCart,
         removeFromCart,
         getCart,
-        getCartTotalCost
+        getCartTotalCost,
+        userSignedIn,
+        setUserSignedIn
     };
 
     return (

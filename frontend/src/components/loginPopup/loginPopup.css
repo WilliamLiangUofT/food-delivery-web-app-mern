@@ -68,3 +68,9 @@
     cursor: pointer;
 }
 
+.invalid-auth {
+    color: red;
+    font-size: 12px;
+    margin-top: -0.7rem;
+}
+

@@ -6,31 +6,33 @@ export const registerUser = async (req, res, next) => {
         
         const { name, email, password } = req.body;
         
-        const user = await userModel.create({
-            name,
-            email,
-            password
-        });
-
-        if (user) {
-            generateToken(res, user._id);
-
-            res.status(201).json({
-                success: true,
-                message: `User: ${user._id} ${user.name} ${user.email} created sucessfully`,
-                userInfo: {
-                    _id: user._id,
-                    name: user.name,
-                    email: user.email,
-                    cartData: user.cartData
-                }
+        let user;
+        try {
+            user = await userModel.create({
+                name,
+                email,
+                password
             });
-        } else {
-            res.status(400).json({
+        } catch (error) {
+            return res.status(200).json({
                 success: false,
-                message: "Bad request, user could not be created."
+                message: error.message
             });
         }
+        
+        generateToken(res, user._id);
+
+        res.status(201).json({
+            success: true,
+            message: `User: ${user._id} ${user.name} ${user.email} created sucessfully`,
+            userInfo: {
+                _id: user._id,
+                name: user.name,
+                email: user.email,
+                cartData: user.cartData
+            }
+        });
+
     } catch (error) {
         res.status(500);
         throw new Error(error.message);
@@ -56,7 +58,7 @@ export const authUser = async (req, res, next) => {
                 }
             });
         } else {
-            res.status(400).json({
+            res.status(200).json({
                 success: false,
                 message: "Email or password is incorrect",
             });
