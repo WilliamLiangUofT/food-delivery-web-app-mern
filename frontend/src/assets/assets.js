@@ -53,6 +53,9 @@ import remove_icon_red from './remove_icon_red.png'
 import app_store from './app_store.png'
 import play_store from './play_store.png'
 
+import bag_icon from './bag_icon.png'
+import logout_icon from './logout_icon.png'
+
 export const assets = {
     searchbar,
     cart,
@@ -62,7 +65,9 @@ export const assets = {
     remove_icon_red,
     app_store,
     play_store,
-    close
+    close,
+    bag_icon,
+    logout_icon
 };
 
 // Retrieve this from backend once backend is added

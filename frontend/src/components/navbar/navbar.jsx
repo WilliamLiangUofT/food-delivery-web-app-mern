@@ -4,14 +4,25 @@ import { useState } from 'react';
 import { Link } from 'react-router';
 import { GlobalContext } from '../../context/ContextStore';
 import { useContext } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { useLogoutUserMutation } from '../../slices/apiSlice';
+import { resetUser } from '../../slices/userSlice';
 
 function NavBar({setShowLoginPopup}) {
     const [menuSelected, setMenuSelected] = useState("home");
 
-    const { userSignedIn } = useContext(GlobalContext);
+    const { userSignedIn, setUserSignedIn } = useContext(GlobalContext);
 
     const userData = useSelector((state) => state.user);
+    const dispatch = useDispatch();
+
+    const [ logoutUser ] = useLogoutUserMutation();
+
+    const onLogoutUserHandler = () => {
+        logoutUser();
+        dispatch(resetUser());
+        setUserSignedIn(false);
+    };
 
     return (
         <div className="navigation-bar">
@@ -29,7 +40,17 @@ function NavBar({setShowLoginPopup}) {
             <div className='right-side'>
                 <img src={assets.searchbar} id='search-bar'/>
                 <Link to='/cart'><img src={assets.cart} id='cart-icon'/></Link>
-                {userSignedIn ? <h2 className='login-name-h2'>{userData.name}</h2> : <button onClick={() => setShowLoginPopup(true)}>Sign In</button>}
+                {userSignedIn ? 
+                <div className='navbar-profile'>
+                    <h2 className='login-name-h2'>{userData.name}</h2>
+                    <ul className='nav-profile-dropdown'>
+                        
+                        <li><img src={assets.bag_icon}/><p>Orders</p></li>
+                        <hr/>
+                        <li onClick={onLogoutUserHandler}><img src={assets.logout_icon}/><p>Logout</p></li>
+                    </ul>
+                </div>
+                : <button onClick={() => setShowLoginPopup(true)}>Sign In</button>}
             </div>
         </div>
     );

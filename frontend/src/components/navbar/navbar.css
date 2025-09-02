@@ -86,4 +86,42 @@
     color: var(--pink-sand);
     font-size: 2.0rem;
     font-weight: 550;
+    cursor: pointer;
+}
+
+.navbar-profile {
+    position: relative;
+}
+
+.nav-profile-dropdown {
+    position: absolute;
+    display: none;
+    right: 0;
+    z-index: 1;
+    list-style: none;
+}
+
+.navbar-profile:hover .nav-profile-dropdown {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 12px 24px;
+    background-color: hsl(0, 0%, 100%);
+    border-radius: 6px;
+    outline: 2px solid white;
+}
+
+.nav-profile-dropdown li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.nav-profile-dropdown li:hover {
+    color: var(--pink-sand);
+}
+
+.nav-profile-dropdown img {
+    width: 2.1rem;
 }
