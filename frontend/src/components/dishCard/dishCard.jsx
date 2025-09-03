@@ -24,7 +24,7 @@ function DishCard({id, name, image, price, description, category}) {
 
     return (
         <div className='dish-card'>
-            <img className='dish-image' src={image}/>
+            <img className='dish-image' src={`http://localhost:4000/images/${image}`}/>
             {controller}
             <div className='dish-info'>
                 <div className='dish-rating'>

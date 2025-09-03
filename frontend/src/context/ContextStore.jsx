@@ -1,12 +1,25 @@
 import { createContext, useState } from "react";
 import { food_list } from "../assets/assets";
+import { useGetItemsQuery } from "../slices/apiSlice";
+import { useEffect } from "react";
 
 export const GlobalContext = createContext();
 
 function ContextStoreProvider({children}) {
+
+    const [foodList, setFoodList] = useState([]);
+
     const [cartCounts, setCartCounts] = useState({});
 
     const [userSignedIn, setUserSignedIn] = useState(false);
+
+    const { data, isLoading, error } = useGetItemsQuery();
+
+    useEffect(() => {
+        if (data) {
+            setFoodList(data.data);
+        }
+    }, [data]);
 
     const addToCart = (dishID) => {
         if (dishID in cartCounts) {
@@ -21,7 +34,7 @@ function ContextStoreProvider({children}) {
     };
 
     const getCart = () => {
-        return food_list.filter(element => element._id in cartCounts && cartCounts[element._id] > 0);
+        return foodList.filter(element => element._id in cartCounts && cartCounts[element._id] > 0);
     };
 
     const getCartTotalCost = () => {
@@ -32,7 +45,7 @@ function ContextStoreProvider({children}) {
     };
 
     const context = {
-        food_list,
+        foodList,
         cartCounts,
         setCartCounts,
         addToCart,

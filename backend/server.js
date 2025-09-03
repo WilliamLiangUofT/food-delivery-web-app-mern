@@ -10,6 +10,10 @@ import cookieParser from "cookie-parser"
 
 dotenv.config();
 const port = process.env.PORT;
+const allowed_origins = [
+  process.env.FRONTEND_ORIGIN,
+  process.env.ADMIN_ORIGIN
+]
 
 const app = express();
 
@@ -19,7 +23,7 @@ app.use(express.json());
 // app.use(cors());
 
 app.use(cors({
-  origin: process.env.FRONTEND_ORIGIN,
+  origin: allowed_origins,
   credentials: true, // allow cookies
 }));
 

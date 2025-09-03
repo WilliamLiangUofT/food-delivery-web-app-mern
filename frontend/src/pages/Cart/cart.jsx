@@ -26,7 +26,7 @@ function Cart() {
                         return (
                             <>
                                 <div className='column-item-names cart-actual-item' key={element._id}>
-                                    <img src={element.image}/>
+                                    <img src={`http://localhost:4000/images/${element.image}`}/>
                                     <p>{element.name}</p>
                                     <p>${element.price}</p>
                                     <p>{cartCounts[element._id]}</p>

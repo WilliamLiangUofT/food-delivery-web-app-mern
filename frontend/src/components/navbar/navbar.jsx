@@ -1,7 +1,7 @@
 import './navbar.css'
 import { assets } from '../../assets/assets';
 import { useState } from 'react';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { GlobalContext } from '../../context/ContextStore';
 import { useContext } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
@@ -16,12 +16,15 @@ function NavBar({setShowLoginPopup}) {
     const userData = useSelector((state) => state.user);
     const dispatch = useDispatch();
 
+    const navigate = useNavigate();
+
     const [ logoutUser ] = useLogoutUserMutation();
 
     const onLogoutUserHandler = () => {
         logoutUser();
         dispatch(resetUser());
         setUserSignedIn(false);
+        navigate('/');
     };
 
     return (

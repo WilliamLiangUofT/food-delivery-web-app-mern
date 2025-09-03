@@ -4,7 +4,7 @@ import fs from 'fs';
 import path from "path";
 
 export const addFoodDish = async (req, res, next) => {
-    const image_file_name = `${req.file.filename}`;
+    const image_file_name = `${req.file.filename}`; // upload.single, so there is only one.
     const newFoodDish = req.body;
 
     try {

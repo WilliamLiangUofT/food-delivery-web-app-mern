@@ -10,7 +10,7 @@ function DishDisplay({category}) {
         <div className='dish-display-container'>
             <h2>Top Dishes Near You</h2>
             <div className='dish-grid'>
-                {dish_menu.food_list.map((card, index) => {
+                {dish_menu.foodList.map((card, index) => {
                     if (category === "" || category === card.category) {
                         return (
                             <DishCard key={index} id={card._id} name={card.name} image={card.image} price={card.price} description={card.description}/>
