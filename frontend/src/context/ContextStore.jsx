@@ -1,5 +1,4 @@
 import { createContext, useState } from "react";
-import { food_list } from "../assets/assets";
 import { useGetItemsQuery } from "../slices/apiSlice";
 import { useEffect } from "react";
 
