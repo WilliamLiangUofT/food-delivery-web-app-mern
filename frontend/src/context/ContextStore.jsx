@@ -1,24 +1,53 @@
 import { createContext, useState } from "react";
-import { useGetItemsQuery } from "../slices/apiSlice";
+import { useGetItemsQuery, useGetCookieQuery, useAddCartMutation, useRemoveCartMutation, useListCartQuery } from "../slices/apiSlice";
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { setUserField } from "../slices/userSlice";
 
 export const GlobalContext = createContext();
 
 function ContextStoreProvider({children}) {
 
+    const dispatch = useDispatch();
+
     const [foodList, setFoodList] = useState([]);
 
     const [cartCounts, setCartCounts] = useState({});
 
+    const [databaseCartCounts, setDatabaseCartCounts] = useState({});
+
     const [userSignedIn, setUserSignedIn] = useState(false);
 
-    const { data, isLoading, error } = useGetItemsQuery();
+    const [cookieExist, setCookieExist] = useState(false);
+
+    const { data: itemsData, isLoading: itemsLoading, isError: itemsIsError, error: itemsError} = useGetItemsQuery();
+    const { data: cookiesData, isLoading: cookiesLoading, isError: cookieIsError, error: cookiesError} = useGetCookieQuery();
+    const {data: listCartData, isLoading, error} = useListCartQuery();
+
+    const [addCart] = useAddCartMutation();
+    const [removeCart] = useRemoveCartMutation();
 
     useEffect(() => {
-        if (data) {
-            setFoodList(data.data);
+        if (listCartData) {
+            setDatabaseCartCounts(listCartData.cart_items);
         }
-    }, [data]);
+    }, [listCartData]);
+
+    useEffect(() => {
+        if (itemsData) {
+            setFoodList(itemsData.data);
+        }
+    }, [itemsData]);
+
+    useEffect(() => {
+        if (cookiesData?.success) {
+            setCookieExist(true);
+
+            cookiesData.userInfo
+        } else {
+            setCookieExist(false);
+        }
+    }, [cookiesData]);
 
     const addToCart = (dishID) => {
         if (dishID in cartCounts) {
@@ -26,11 +55,32 @@ function ContextStoreProvider({children}) {
         } else {
             setCartCounts(prevCartCounts => ({...prevCartCounts, [dishID]: 1}));
         }
+
+        if (cookieExist) {
+            addCart({item_id: dishID});
+        }
     };
 
     const removeFromCart = (dishID) => {
         setCartCounts(prevCartCounts => ({...prevCartCounts, [dishID]: prevCartCounts[dishID] - 1}));
+
+        if (cookieExist) {
+            removeCart({item_id: dishID});
+        }
     };
+
+    useEffect(() => {
+        if (cookieExist) {
+            setCartCounts({...databaseCartCounts});
+            dispatch(setUserField({
+                fieldName: "name",
+                newValue: cookiesData.userInfo.name
+            }));
+            setUserSignedIn(true);
+        } else {
+            setCartCounts({});
+        }
+    }, [cookieExist, databaseCartCounts]);
 
     const getCart = () => {
         return foodList.filter(element => element._id in cartCounts && cartCounts[element._id] > 0);
@@ -52,7 +102,8 @@ function ContextStoreProvider({children}) {
         getCart,
         getCartTotalCost,
         userSignedIn,
-        setUserSignedIn
+        setUserSignedIn,
+        cookieExist
     };
 
     return (

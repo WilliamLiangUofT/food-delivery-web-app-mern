@@ -2,6 +2,8 @@ import { useContext } from 'react';
 import './cart.css'
 import { GlobalContext } from '../../context/ContextStore';
 import { useNavigate } from 'react-router';
+import React from 'react';
+import { Fragment } from 'react';
 
 function Cart() {
 
@@ -24,8 +26,8 @@ function Cart() {
                 {filtered_food_list
                     .map((element, index) => {
                         return (
-                            <>
-                                <div className='column-item-names cart-actual-item' key={element._id}>
+                            <React.Fragment key={element._id}>
+                                <div className='column-item-names cart-actual-item'>
                                     <img src={`http://localhost:4000/images/${element.image}`}/>
                                     <p>{element.name}</p>
                                     <p>${element.price}</p>
@@ -34,7 +36,7 @@ function Cart() {
                                     <p className='cross-remove-item' onClick={() => removeFromCart(element._id)}>x</p>
                                 </div>
                                 <hr/>
-                            </>
+                            </React.Fragment>
                             
                         );
                     })}

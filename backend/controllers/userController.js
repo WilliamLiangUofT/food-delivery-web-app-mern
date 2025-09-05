@@ -88,18 +88,26 @@ export const logoutUser = async (req, res, next) => {
     
 };
 
-export const addCartItems = async (req, res, next) => {
-
+export const checkCookie = async (req, res, next) => {
+    try {
+        const token = req.cookies.jwt;
+        const obtained_user = req.user;
+        if (token) {
+            return res.status(200).json({
+                success: true,
+                userInfo: obtained_user,
+                message: "JWT HTTPOnly cookie exists"
+            })
+        } else {
+            return res.status(200).json({
+                success: false,
+                message: "JWT HTTPOnly cookie not found"
+            })
+        }
+    } catch (error) {
+        res.status(500);
+        throw new Error(error.message);
+    }
 };
 
-export const removeCartItems = async (req, res, next) => {
-
-};
-
-export const getCartItems = async (req, res, next) => {
-    const userInformation = req.user;
-    res.status(200).json({
-        cart_items: userInformation.cartData
-    });
-};
 
