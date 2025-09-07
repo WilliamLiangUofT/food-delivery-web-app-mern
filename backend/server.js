@@ -1,15 +1,17 @@
+import dotenv from 'dotenv'
+dotenv.config();
+
 import express from "express"
 import cors from "cors"
-import dotenv from 'dotenv'
 import { connectDB } from "./config/db.js"
 import foodMenuRouter from "./routes/foodMenuRouter.js"
 import userRouter from "./routes/userRouter.js"
 import cartRouter from "./routes/cartRouter.js"
+import orderRouter from './routes/orderRouter.js'
 import { endPointNotFound, errorHandler } from "./middleware/errorMiddleware.js"
 import logger from "./middleware/loggerMiddleware.js"
 import cookieParser from "cookie-parser"
 
-dotenv.config();
 const port = process.env.PORT;
 const allowed_origins = [
   process.env.FRONTEND_ORIGIN,
@@ -37,6 +39,7 @@ connectDB();
 app.use('/api/foodMenu', foodMenuRouter);
 app.use('/api/user', userRouter);
 app.use('/api/cart', cartRouter);
+app.use('/api/order', orderRouter);
 app.use('/images', express.static('uploads')); // Serve images so frontend can access them easily
 
 app.use(endPointNotFound);

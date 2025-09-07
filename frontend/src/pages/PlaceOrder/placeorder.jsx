@@ -1,14 +1,66 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import './placeorder.css'
 import { GlobalContext } from '../../context/ContextStore';
 import { useNavigate } from 'react-router';
+import { usePlaceOrderMutation, useGetCookieQuery } from '../../slices/apiSlice';
 
 function PlaceOrder() {
 
-    const { getCart, getCartTotalCost } = useContext(GlobalContext);
+    const { getCart, getCartTotalCost, cartCounts } = useContext(GlobalContext);
     const filtered_food_list = getCart();
 
+    const [inputFieldValues, setInputFieldValues] = useState({
+        firstName: "",
+        lastName: "",
+        email: "",
+        street: "",
+        city: "",
+        state: "",
+        zipCode: "",
+        country: "",
+        phone: ""
+    });
+
+    const onInputChange = (e) => {
+        const input_field_name = e.target.name;
+        const input_field_value = e.target.value;
+
+        setInputFieldValues(prevVal => ({...prevVal, [input_field_name]: input_field_value}));
+    };
+
     const navigate = useNavigate();
+    const [placeOrder] = usePlaceOrderMutation();
+    const {data, isLoading, error} = useGetCookieQuery();
+
+    const onSubmitHandler = async (e) => {
+        e.preventDefault();
+
+        try {
+            let orderItems = [];
+            filtered_food_list.map((element, index) => {
+                let item_info = {...element};
+                item_info["quantity"] = cartCounts[element._id];
+                orderItems.push(item_info);
+            });
+
+            const payload = {
+                userId: data.userInfo._id,
+                items: orderItems,
+                subTotalAmount: getCartTotalCost(),
+                deliveryFee: filtered_food_list.length,
+                address: inputFieldValues
+            };
+
+            const response = await placeOrder(payload).unwrap();
+            if (response.success) {
+                const {sessionURL} = response;
+                window.location.replace(sessionURL);
+            }
+
+        } catch (error) {
+            alert(`ERROR: Status: ${error.status} Message: ${error.message}`)
+        }
+    };
 
     return (
         <form className='place-order'>
@@ -16,19 +68,19 @@ function PlaceOrder() {
                 <h2>Delivery Information</h2>
 
                 <div className='order-grid-area'>
-                    <input type="text" placeholder='First name'/>
-                    <input type="text" placeholder='Last name'/>
+                    <input name='firstName' value={inputFieldValues.firstName} onChange={onInputChange} type="text" placeholder='First name'/>
+                    <input name='lastName' value={inputFieldValues.lastName} onChange={onInputChange} type="text" placeholder='Last name'/>
 
-                    <input id='delivery-email-input' type="email" placeholder='Email address'/>
-                    <input id='street-input' type="text" placeholder='Street'/>
+                    <input name='email' value={inputFieldValues.email} onChange={onInputChange} id='delivery-email-input' type="email" placeholder='Email address'/>
+                    <input name='street' value={inputFieldValues.street} onChange={onInputChange} id='street-input' type="text" placeholder='Street'/>
 
-                    <input type="text" placeholder='City'/>
-                    <input type="text" placeholder='State'/>
+                    <input name='city' value={inputFieldValues.city} onChange={onInputChange} type="text" placeholder='City'/>
+                    <input name='state' value={inputFieldValues.state} onChange={onInputChange} type="text" placeholder='State'/>
 
-                    <input type="text" placeholder='Zip code'/>
-                    <input type="text" placeholder='Country'/>
+                    <input name='zipCode' value={inputFieldValues.zipCode} onChange={onInputChange} type="text" placeholder='Zip code'/>
+                    <input name='country' value={inputFieldValues.country} onChange={onInputChange} type="text" placeholder='Country'/>
 
-                    <input id='phone-input' type="text" placeholder='Phone'/>
+                    <input name='phone' value={inputFieldValues.phone} onChange={onInputChange} id='phone-input' type="text" placeholder='Phone'/>
                 </div>
             </div>
 
@@ -57,7 +109,7 @@ function PlaceOrder() {
                         
                     </div>
 
-                    <button type="button" onClick={() => navigate('/')}>PROCEED TO PAYMENT</button>
+                    <button type="submit" onClick={onSubmitHandler}>PROCEED TO PAYMENT</button>
                     
                 </div>
 

@@ -22,7 +22,7 @@ function ContextStoreProvider({children}) {
 
     const { data: itemsData, isLoading: itemsLoading, isError: itemsIsError, error: itemsError} = useGetItemsQuery();
     const { data: cookiesData, isLoading: cookiesLoading, isError: cookieIsError, error: cookiesError} = useGetCookieQuery();
-    const {data: listCartData, isLoading, error} = useListCartQuery();
+    const { data: listCartData, isLoading, error } = useListCartQuery();
 
     const [addCart] = useAddCartMutation();
     const [removeCart] = useRemoveCartMutation();
@@ -42,8 +42,6 @@ function ContextStoreProvider({children}) {
     useEffect(() => {
         if (cookiesData?.success) {
             setCookieExist(true);
-
-            cookiesData.userInfo
         } else {
             setCookieExist(false);
         }

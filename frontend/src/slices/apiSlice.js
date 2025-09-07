@@ -34,6 +34,9 @@ export const apiSlice = createApi({
         listCart: builder.query({
             query: () => '/cart/listCart',
             providesTags: ['Cart']
+        }),
+        placeOrder: builder.mutation({
+            query: ({userId, items, subTotalAmount, deliveryFee, address}) => ({url: '/order/place', method: 'POST', body: {userId, items, subTotalAmount, deliveryFee, address}})
         })
     })
 })
@@ -46,6 +49,7 @@ export const {
     useGetItemsQuery,
     useAddCartMutation,
     useRemoveCartMutation,
-    useListCartQuery
+    useListCartQuery,
+    usePlaceOrderMutation
 } = apiSlice;
 
