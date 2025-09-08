@@ -2,21 +2,28 @@
     width: 80%;
     margin: auto;
     padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 5vh;
 }
 
 .user-orders h2 {
     font-size: 2.4rem;
+    margin-bottom: -4vh;
 }
 
 .order-id-info {
     display: flex;
     margin-top: 1.5vh;
+    flex-direction: column;
+    gap: 2vh;
 }
 
 .order-id-info .order-status-top {
     display: flex;
     justify-content: space-between;
     width: 100%;
+    align-items: center;
 }
 
 .order-id-info .order-status-top .order-status-id {
@@ -25,5 +32,13 @@
 
 .order-id-info .order-status-top .order-status-button {
     font-size: 1.2rem;
+}
+
+.order-status-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    grid-auto-rows: minmax(80px, auto); 
+    font-size: 1.4rem;
+    font-weight: 500;
 }
 

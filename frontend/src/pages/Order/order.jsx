@@ -33,16 +33,31 @@ function Order() {
     return (
         <div className='user-orders'>
             <h2>Your Orders</h2>
-            {orderDataList.map((element, index) => {
+            {orderDataList.map((order_element, index) => {
+                const orderItems = order_element.items;
                 return (
                     <div className='order-id-info' key={index}>
                         <div className='order-status-top'>
-                            <p className='order-status-id'>Order ID #{element._id}</p>
-                            <button className='order-status-button'>{element.order_status}</button>
+                            <p className='order-status-id'>Order ID #{order_element._id}</p>
+                            <button className='order-status-button'>{order_element.order_status}</button>
                         </div>
 
                         <div className='order-status-grid'>
-                            
+                            <p>Items</p>
+                            <p>Quantity</p>
+                            <p>Price</p>
+                            <p>Total Price</p>
+                            {orderItems.map((item_element, item_index) => {
+                                return (
+                                    <>
+                                        <p>{item_element.name}</p>
+                                        <p>{item_element.quantity}</p>
+                                        <p>{item_element.price}</p>
+                                        <p>{item_element.price * item_element.quantity}</p>
+                                    </>
+                                    
+                                );
+                            })}
                         </div>
                         
                     </div>
