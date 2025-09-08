@@ -67,4 +67,56 @@ export const placeOrder = async (req, res, next) => {
     }
 };
 
+export const verifyOrder = async (req, res, next) => {
+    try {
+        const { success, orderId } = req.body;
+        if (success === "true") {
+            const result = await orderModel.updateOne(
+                {_id: orderId},
+                {payment: true}
+            );
+
+            if (result.matchedCount === 0) {
+                return res.status(400).json({
+                    success: false,
+                    message: "Order not found, bad user request."
+                });
+            }
+            
+            return res.status(200).json({
+                success: true,
+                message: "Payment successful"
+            });
+        } else {
+            const deletedOrder = await orderModel.findByIdAndDelete(orderId);
+            if (deletedOrder) {
+                return res.status(200).json({
+                    success: false,
+                    message: "Payment unsuccessful. Order deleted."
+                });
+            } else {
+                return res.status(400).json({
+                    message: "Order could not be found."
+                });
+            }
+        }
+    } catch (error) {
+        res.status(500);
+        throw new Error(error.message);
+    }
+};
+
+export const getOrders = async (req, res, next) => {
+    try {
+        const all_orders = await orderModel.find({});
+        return res.status(200).json({
+            success: true,
+            orderInfo: all_orders
+        });
+    } catch (error) {
+        
+    }
+};
+
+
 

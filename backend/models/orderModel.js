@@ -23,11 +23,11 @@ const order_schema = mongoose.Schema({
     },
     order_status: {
         type: String,
-        default: "Food Processing"
+        default: "Order Processing"
     },
     date: {
         type: Date,
-        default: Date.now()
+        default: Date.now
     },
     payment: {
         type: Boolean,

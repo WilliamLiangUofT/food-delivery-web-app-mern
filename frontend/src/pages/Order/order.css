@@ -1,0 +1,29 @@
+.user-orders {
+    width: 80%;
+    margin: auto;
+    padding: 3rem;
+}
+
+.user-orders h2 {
+    font-size: 2.4rem;
+}
+
+.order-id-info {
+    display: flex;
+    margin-top: 1.5vh;
+}
+
+.order-id-info .order-status-top {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.order-id-info .order-status-top .order-status-id {
+    font-size: 1.5rem;
+}
+
+.order-id-info .order-status-top .order-status-button {
+    font-size: 1.2rem;
+}
+

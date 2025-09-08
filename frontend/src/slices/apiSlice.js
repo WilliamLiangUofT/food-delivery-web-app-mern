@@ -2,7 +2,7 @@ import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 
 export const apiSlice = createApi({
     baseQuery: fetchBaseQuery({baseUrl: 'http://localhost:4000/api', credentials: "include"}),
-    tagTypes: ['Token', 'Cart'],
+    tagTypes: ['Token', 'Cart', 'Order'],
     endpoints: (builder) => ({
         registerUser: builder.mutation({
             query: ({name, email, password}) => ({url: 'user/register', method: 'POST', body: {name, email, password}}),
@@ -36,7 +36,16 @@ export const apiSlice = createApi({
             providesTags: ['Cart']
         }),
         placeOrder: builder.mutation({
-            query: ({userId, items, subTotalAmount, deliveryFee, address}) => ({url: '/order/place', method: 'POST', body: {userId, items, subTotalAmount, deliveryFee, address}})
+            query: ({userId, items, subTotalAmount, deliveryFee, address}) => ({url: '/order/place', method: 'POST', body: {userId, items, subTotalAmount, deliveryFee, address}}),
+            invalidatesTags: ['Order']
+        }),
+        verifyOrder: builder.mutation({
+            query: ({success, orderId}) => ({url: '/order/verify', method: 'POST', body: {success, orderId}}),
+            invalidatesTags: ['Order']
+        }),
+        listOrder: builder.query({
+            query: () => '/order/list',
+            providesTags: ['Order']
         })
     })
 })
@@ -50,6 +59,8 @@ export const {
     useAddCartMutation,
     useRemoveCartMutation,
     useListCartQuery,
-    usePlaceOrderMutation
+    usePlaceOrderMutation,
+    useVerifyOrderMutation,
+    useListOrderQuery
 } = apiSlice;
 
