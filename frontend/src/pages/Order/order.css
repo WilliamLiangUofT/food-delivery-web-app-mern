@@ -16,7 +16,7 @@
     display: flex;
     margin-top: 1.5vh;
     flex-direction: column;
-    gap: 2vh;
+    gap: 1vh;
     
 }
 
@@ -29,6 +29,7 @@
 
 .order-id-info .order-status-top .order-status-id {
     font-size: 1.5rem;
+    font-weight: 500;
 }
 
 .order-id-info .order-status-top .order-status-button {
