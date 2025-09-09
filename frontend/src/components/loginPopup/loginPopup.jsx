@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setUserField } from '../../slices/userSlice';
 import { useRegisterUserMutation, useLoginUserMutation } from '../../slices/apiSlice';
 import { GlobalContext } from '../../context/ContextStore';
+import { useNavigate } from 'react-router';
 
 function LoginPopup({setShowLoginPopup}) {
 
@@ -14,6 +15,7 @@ function LoginPopup({setShowLoginPopup}) {
 
     const userData = useSelector((state) => state.user);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const [ registerUser ] = useRegisterUserMutation();
     const [ loginUser ] = useLoginUserMutation();
@@ -43,6 +45,7 @@ function LoginPopup({setShowLoginPopup}) {
             if (response.success) {
                 setShowLoginPopup(false);
                 setUserSignedIn(true);
+                navigate('/');
             } else {
                 setInvalidCreateAccFlag(true);
             }
@@ -69,6 +72,8 @@ function LoginPopup({setShowLoginPopup}) {
                     fieldName: 'name',
                     newValue: response.userInfo.name
                 }));
+
+                navigate('/');
 
             } else {
                 setInvalidLoginFlag(true);

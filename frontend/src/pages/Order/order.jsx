@@ -1,15 +1,26 @@
 import { useEffect, useState } from 'react';
 import { useListOrderQuery } from '../../slices/apiSlice';
 import './order.css'
+import { useNavigate } from 'react-router';
+import React from 'react';
+import { Fragment } from 'react';
+import { assets } from '../../assets/assets';
 
 function Order() {
     const {data, isLoading, error} = useListOrderQuery();
     const [orderDataList, setOrderDataList] = useState([]);
+    const [invalidAuth, setInvalidAuth] = useState(false);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (data) {
-            setOrderDataList(data.orderInfo);
-            console.log(data.orderInfo)
+            if (data.success) {
+                setOrderDataList(data.orderInfo);
+                console.log(data.orderInfo)
+            } else {
+                setInvalidAuth(true);
+            }
         }
     }, [data]);
 
@@ -26,6 +37,16 @@ function Order() {
             <div>
                 <h2>Error loading orders</h2>
                 <p>{error.message}</p>
+            </div>
+        );
+    }
+
+    if (invalidAuth) {
+        return (
+            <div>
+                <h2>403 FORBIDDEN</h2>
+                <p>You are not allowed to visit the page you were looking for.</p>
+                <button onClick={() => navigate('/')}>Go Home</button>
             </div>
         );
     }
@@ -47,15 +68,26 @@ function Order() {
                             <p>Quantity</p>
                             <p>Price</p>
                             <p>Total Price</p>
+
                             {orderItems.map((item_element, item_index) => {
                                 return (
-                                    <>
-                                        <p>{item_element.name}</p>
+                                    <React.Fragment key={item_index}>
+                                        <div className='order-status-title'>
+                                            <div className='order-status-title-left'>
+                                                <img src={`http://localhost:4000/images/${item_element.image}`} className='order-image-icon'/>
+                                            </div>
+
+                                            <div className='order-status-title-right'>
+                                                <span id='main-course'>MAIN COURSE</span>
+                                                <span>{item_element.name}</span>
+                                                <img src={assets.stars} className='order-stars'/>
+                                            </div>
+                                        </div>
+                                        
                                         <p>{item_element.quantity}</p>
-                                        <p>{item_element.price}</p>
-                                        <p>{item_element.price * item_element.quantity}</p>
-                                    </>
-                                    
+                                        <p>${item_element.price}</p>
+                                        <p>${item_element.price * item_element.quantity}</p>
+                                    </React.Fragment>
                                 );
                             })}
                         </div>

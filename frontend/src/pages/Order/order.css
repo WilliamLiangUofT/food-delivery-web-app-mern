@@ -17,6 +17,7 @@
     margin-top: 1.5vh;
     flex-direction: column;
     gap: 2vh;
+    
 }
 
 .order-id-info .order-status-top {
@@ -40,5 +41,46 @@
     grid-auto-rows: minmax(80px, auto); 
     font-size: 1.4rem;
     font-weight: 500;
+    background-color: white;
+    padding: 3rem;
+    border-radius: 1.5rem;
+    align-items: center;
 }
 
+.order-status-grid p:nth-child(1),
+.order-status-grid p:nth-child(2),
+.order-status-grid p:nth-child(3),
+.order-status-grid p:nth-child(4) {
+    font-weight: 600;
+    color: black;
+    font-size: 1.62rem;
+    border-bottom: 3px solid #e5e7eb;
+    padding-bottom: 1.3rem;
+    /* margin-top: 0.5rem;  */
+}
+
+.order-image-icon {
+    width: 10vh;
+    border-radius: 15px;
+}
+
+.order-status-title {
+    display: flex;
+    gap: 0.8vw;
+    padding: 10px 0px;
+}
+
+#main-course {
+    color: rgb(106, 106, 255);
+    font-size: 1.0rem;
+}
+
+.order-status-title-right {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4vh;
+}
+
+.order-stars {
+    width: 7vh;
+}

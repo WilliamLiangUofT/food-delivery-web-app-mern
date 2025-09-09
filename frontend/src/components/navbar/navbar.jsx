@@ -48,7 +48,7 @@ function NavBar({setShowLoginPopup}) {
                     <h2 className='login-name-h2'>{userData.name}</h2>
                     <ul className='nav-profile-dropdown'>
                         
-                        <li><img src={assets.bag_icon}/><p>Orders</p></li>
+                        <li onClick={() => navigate('/orders')}><img src={assets.bag_icon}/><p>Orders</p></li>
                         <hr/>
                         <li onClick={onLogoutUserHandler}><img src={assets.logout_icon}/><p>Logout</p></li>
                     </ul>

@@ -114,7 +114,8 @@ export const getOrders = async (req, res, next) => {
             orderInfo: all_orders
         });
     } catch (error) {
-        
+        res.status(500);
+        throw new Error(error.message);
     }
 };
 
