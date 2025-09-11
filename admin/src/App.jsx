@@ -5,6 +5,7 @@ import { Route, Routes } from "react-router"
 import AddItem from "./pages/AddItem/addItem";
 import ListItems from "./pages/ListItems/listItems";
 import Orders from "./pages/Orders/orders";
+import AdminLogin from "./pages/AdminLogin/adminLogin";
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
 
       <div>
         <Routes>
+          <Route path="/" element={<AdminLogin/>} />
           <Route path="/addItem" element={<AddItem/>} />
           <Route path="/listItems" element={<ListItems/>} />
           <Route path="/orders" element={<Orders/>} />

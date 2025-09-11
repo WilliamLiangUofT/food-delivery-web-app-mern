@@ -6,15 +6,15 @@ export const apiSlice = createApi({
     endpoints: (builder) => ({
         registerUser: builder.mutation({
             query: ({name, email, password}) => ({url: 'user/register', method: 'POST', body: {name, email, password}}),
-            invalidatesTags: ['Token']
+            invalidatesTags: ['Token', 'Order']
         }),
         loginUser: builder.mutation({
             query: ({email, password}) => ({url: 'user/login', method: 'POST', body: {email, password}}),
-            invalidatesTags: ['Token', 'Cart']
+            invalidatesTags: ['Token', 'Cart', 'Order']
         }),
         logoutUser: builder.mutation({
             query: () => ({url: 'user/logout', method: 'POST'}),
-            invalidatesTags: ['Token', 'Cart']
+            invalidatesTags: ['Token', 'Cart', 'Order']
         }),
         getCookie: builder.query({
             query: () => '/user/me',

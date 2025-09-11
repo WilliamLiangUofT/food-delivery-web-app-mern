@@ -108,7 +108,7 @@ export const verifyOrder = async (req, res, next) => {
 
 export const getOrders = async (req, res, next) => {
     try {
-        const all_orders = await orderModel.find({});
+        const all_orders = await orderModel.find({userId: req.user._id});
         return res.status(200).json({
             success: true,
             orderInfo: all_orders

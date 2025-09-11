@@ -1,5 +1,7 @@
 import userModel from "../models/userModel.js";
 import generateToken from "../utils/generateToken.js";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 export const registerUser = async (req, res, next) => {
     try {
@@ -110,4 +112,37 @@ export const checkCookie = async (req, res, next) => {
     }
 };
 
+export const authAdmin = async (req, res, next) => {
+    try {
+        const { email, password } = req.body;
+
+        const matchingEmailFlag = email === process.env.ADMIN_EMAIL;
+        const matchingPasswordsFlag = await bcrypt.compare(password, process.env.ADMIN_PASSWORD_HASH);
+        if (matchingEmailFlag && matchingPasswordsFlag) {
+            const rolePayload = {
+                role: "admin"
+            };
+            const token = jwt.sign(rolePayload, process.env.JWT_SECRET, {expiresIn: '2d'});
+            res.cookie('jwt', token, {
+                httpOnly: true,
+                secure: process.env.NODE_ENV === 'production',
+                maxAge: 172800000,
+                sameSite: 'Strict'
+            });
+
+            return res.status(200).json({
+                success: true,
+                message: "Admin logged in"
+            });
+        } else {
+            return res.status(200).json({
+                success: false,
+                message: "Invalid credentials"
+            });
+        }
+    } catch (error) {
+        res.status(500);
+        throw new Error(error.message);
+    }
+};
 

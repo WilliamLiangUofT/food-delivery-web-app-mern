@@ -17,7 +17,6 @@ function Order() {
         if (data) {
             if (data.success) {
                 setOrderDataList(data.orderInfo);
-                console.log(data.orderInfo)
             } else {
                 setInvalidAuth(true);
             }
