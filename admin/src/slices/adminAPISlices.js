@@ -16,8 +16,8 @@ export const apiSlice = createApi({
             query: (id) => ({url: '/foodMenu/remove', method: 'POST', body: {id}}),
             invalidatesTags: ["Items"]
         }),
-        listOrder: builder.query({
-            query: () => '/order/list',
+        listAllOrder: builder.query({
+            query: () => '/order/listAll',
             providesTags: ['Order']
         }),
         loginAdmin: builder.mutation({
@@ -26,6 +26,6 @@ export const apiSlice = createApi({
     })
 })
 // The tags above help with rerenders. When a mutation is performed, the invalidatesTag will basically cause a rerender for getItems, redisplayign the value
-export const { useGetItemsQuery, useAddItemMutation, useRemoveItemMutation, useListOrderQuery, useLoginAdminMutation } = apiSlice;
+export const { useGetItemsQuery, useAddItemMutation, useRemoveItemMutation, useListAllOrderQuery, useLoginAdminMutation } = apiSlice;
 
 

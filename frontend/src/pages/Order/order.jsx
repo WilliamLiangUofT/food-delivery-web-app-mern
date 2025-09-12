@@ -3,7 +3,6 @@ import { useListOrderQuery } from '../../slices/apiSlice';
 import './order.css'
 import { useNavigate } from 'react-router';
 import React from 'react';
-import { Fragment } from 'react';
 import { assets } from '../../assets/assets';
 
 function Order() {

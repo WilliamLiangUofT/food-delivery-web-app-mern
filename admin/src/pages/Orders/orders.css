@@ -1,0 +1,47 @@
+.order-items-container {
+    display: flex;
+    flex-direction: column;
+    padding: 6rem;
+    gap: 3vh;
+}
+
+.order-items-container h2 {
+    color: gray;
+    font-size: 1.8rem;
+}
+
+.admin-order-items-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 0.6fr;
+    grid-template-rows: 100px 1fr;
+    align-items: center;
+    border: 1.4px solid rgb(183, 183, 183);
+    padding: 0rem 3.0rem;
+    padding-bottom: 2rem;
+}
+
+.admin-order-items-grid p {
+    font-size: 1.2rem;
+    color: gray;
+    padding-left: 1.3rem;
+}
+
+.admin-order-item-address {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8vh;
+}
+
+.admin-exact-address {
+    line-height: 1.5;
+}
+
+#processing-select {
+    padding: 10px;
+}
+
+#admin-order-name, #listed-names {
+    font-weight: 550;
+}
+
+

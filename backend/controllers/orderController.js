@@ -108,11 +108,34 @@ export const verifyOrder = async (req, res, next) => {
 
 export const getOrders = async (req, res, next) => {
     try {
-        const all_orders = await orderModel.find({userId: req.user._id});
+        const all_user_orders = await orderModel.find({userId: req.user._id});
+        return res.status(200).json({
+            success: true,
+            orderInfo: all_user_orders
+        });
+    } catch (error) {
+        res.status(500);
+        throw new Error(error.message);
+    }
+};
+
+export const getAllOrders = async (req, res, next) => {
+    try {
+        const all_orders = await orderModel.find({});
         return res.status(200).json({
             success: true,
             orderInfo: all_orders
         });
+    } catch (error) {
+        res.status(500);
+        throw new Error(error.message);
+    }
+};
+
+export const setOrderStatus = async (req, res, next) => {
+    try {
+        const {orderStatus} = req.body;
+        // TODO
     } catch (error) {
         res.status(500);
         throw new Error(error.message);

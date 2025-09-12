@@ -119,16 +119,16 @@ export const authAdmin = async (req, res, next) => {
         const matchingEmailFlag = email === process.env.ADMIN_EMAIL;
         const matchingPasswordsFlag = await bcrypt.compare(password, process.env.ADMIN_PASSWORD_HASH);
         if (matchingEmailFlag && matchingPasswordsFlag) {
-            const rolePayload = {
-                role: "admin"
-            };
-            const token = jwt.sign(rolePayload, process.env.JWT_SECRET, {expiresIn: '2d'});
-            res.cookie('jwt', token, {
-                httpOnly: true,
-                secure: process.env.NODE_ENV === 'production',
-                maxAge: 172800000,
-                sameSite: 'Strict'
-            });
+            // const rolePayload = {
+            //     role: "admin"
+            // };
+            // const token = jwt.sign(rolePayload, process.env.JWT_SECRET, {expiresIn: '2d'});
+            // res.cookie('jwt', token, {
+            //     httpOnly: true,
+            //     secure: process.env.NODE_ENV === 'production',
+            //     maxAge: 172800000,
+            //     sameSite: 'Strict'
+            // });
 
             return res.status(200).json({
                 success: true,
