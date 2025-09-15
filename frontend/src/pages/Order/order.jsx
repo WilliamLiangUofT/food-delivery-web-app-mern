@@ -6,11 +6,15 @@ import React from 'react';
 import { assets } from '../../assets/assets';
 
 function Order() {
-    const {data, isLoading, error} = useListOrderQuery();
+    const {data, isLoading, error, refetch} = useListOrderQuery();
     const [orderDataList, setOrderDataList] = useState([]);
     const [invalidAuth, setInvalidAuth] = useState(false);
 
     const navigate = useNavigate();
+
+    useEffect(() => {
+        refetch();
+    }, [])
 
     useEffect(() => {
         if (data) {

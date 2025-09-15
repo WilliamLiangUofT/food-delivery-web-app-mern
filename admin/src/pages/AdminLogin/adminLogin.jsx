@@ -20,7 +20,6 @@ function AdminLogin() {
         };
 
         const response = await loginAdmin(payload);
-        console.log(response)
         if (response.data.success) {
             navigate('/addItem');
         } else {

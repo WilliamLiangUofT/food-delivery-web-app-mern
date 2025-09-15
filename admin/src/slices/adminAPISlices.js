@@ -20,12 +20,16 @@ export const apiSlice = createApi({
             query: () => '/order/listAll',
             providesTags: ['Order']
         }),
+        setOrderStatus: builder.mutation({
+            query: ({order_id, orderStatus}) => ({url: '/order/setOrderStatus', method: 'POST', body: {order_id, orderStatus}}),
+            invalidatesTags: ['Order']
+        }),
         loginAdmin: builder.mutation({
             query: ({email, password}) => ({url: '/user/admin/login', method: 'POST', body: {email, password}})
         })
     })
 })
 // The tags above help with rerenders. When a mutation is performed, the invalidatesTag will basically cause a rerender for getItems, redisplayign the value
-export const { useGetItemsQuery, useAddItemMutation, useRemoveItemMutation, useListAllOrderQuery, useLoginAdminMutation } = apiSlice;
+export const { useGetItemsQuery, useAddItemMutation, useRemoveItemMutation, useListAllOrderQuery, useSetOrderStatusMutation, useLoginAdminMutation } = apiSlice;
 
 

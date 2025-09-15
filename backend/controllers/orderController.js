@@ -134,8 +134,18 @@ export const getAllOrders = async (req, res, next) => {
 
 export const setOrderStatus = async (req, res, next) => {
     try {
-        const {orderStatus} = req.body;
-        // TODO
+        const {order_id, orderStatus} = req.body;
+        
+        await orderModel.findByIdAndUpdate(
+            order_id,
+            {$set: {order_status: orderStatus}}
+        );
+
+        return res.status(200).json({
+            success: true,
+            message: `Order status succesfully changed to ${orderStatus}`
+        });
+        
     } catch (error) {
         res.status(500);
         throw new Error(error.message);
